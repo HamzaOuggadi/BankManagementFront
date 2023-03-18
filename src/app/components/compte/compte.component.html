@@ -5,11 +5,23 @@
       <p class="text-primary m-0 fw-bold">Liste des Comptes</p>
     </div>
     <div class="card-body">
-      <form>
-        <div class="input-group mb-3"><span class="input-group-text">N° RIB</span><input class="form-control" type="text"><button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button></div>
+      <form [formGroup]="CompteByRibFormGroup" (ngSubmit)="handleCompteByRib()">
+        <div class="input-group mb-3">
+          <span class="input-group-text">N° RIB</span>
+          <input class="form-control" formControlName="numRib" type="text">
+          <button class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
       </form>
-      <form>
-        <div class="input-group mb-3"><span class="input-group-text">N° Client</span><input class="form-control" type="text"><button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button></div>
+      <form [formGroup]="CompteByNumClientFormGroup" (ngSubmit)="handleCompteByNumClient()">
+        <div class="input-group mb-3">
+          <span class="input-group-text">N° Client</span>
+          <input class="form-control" formControlName="numClient" type="text">
+          <button class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
       </form>
       <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
         <table class="table my-0" id="dataTable">
@@ -23,8 +35,18 @@
             <th>Action</th>
           </tr>
           </thead>
-          <tbody>
-
+          <tbody class="table-group-divider">
+          <tr *ngFor="let c of comptes | async">
+            <td>{{c.ribCompte}}</td>
+            <td>{{c.typeCompte}}</td>
+            <td>{{c.balance}}</td>
+            <td>{{c.dateCreation}}</td>
+            <td>{{c.devise}}</td>
+            <td>
+              <button class="btn btn-primary mx-2" title="Détails"><i class="bi bi-receipt"></i></button>
+              <button class="btn btn-success" title="Opération"><i class="bi bi-cash-coin"></i></button>
+            </td>
+          </tr>
           </tbody>
           <tfoot>
           <tr>
