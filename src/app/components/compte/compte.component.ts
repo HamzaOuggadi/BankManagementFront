@@ -13,6 +13,7 @@ export class CompteComponent implements OnInit{
   comptes! : Observable<Array<Compte>>;
   CompteByRibFormGroup! : FormGroup;
   CompteByNumClientFormGroup! : FormGroup;
+  createCompteFormGroup! : FormGroup;
   errorMessage! : string;
   constructor(private compteService : CompteService,
               private fb : FormBuilder) {
@@ -28,6 +29,13 @@ export class CompteComponent implements OnInit{
     this.CompteByNumClientFormGroup = this.fb.group({
       numClient : this.fb.control("")
     });
+
+    this.createCompteFormGroup = this.fb.group({
+      numClientCreate : this.fb.control(""),
+      balance : this.fb.control(""),
+      typeCompte : this.fb.control(""),
+      devise : this.fb.control("")
+    })
 
     this.comptes = this.compteService.getListComptes().pipe(
       catchError(err => {
@@ -52,4 +60,19 @@ export class CompteComponent implements OnInit{
     }));
   }
 
+  handleCreateCompte() {
+    let compte = this.createCompteFormGroup?.value
+    let idGestionnaire : number = 0;
+    let numClient = this.createCompteFormGroup?.value.numClientCreate;
+    // compte.typeCompte = this.createCompteFormGroup?.value.typeCompteCreate;
+    // compte.balance = this.createCompteFormGroup?.value.balance;
+    // compte.devise = this.createCompteFormGroup?.value.deviseCreate;
+    this.compteService.createCompte(compte, numClient, idGestionnaire).subscribe({
+      next : data => {
+        alert("Compte Créer avec succès !");
+      }, error : err => {
+        console.log(err);
+      }
+    })
+  }
 }

@@ -1,14 +1,81 @@
 <div class="container-fluid">
   <h3 class="text-dark mb-4">Gestion de Comptes</h3>
   <div class="card shadow">
-    <div class="card-header py-3">
-      <p class="text-primary m-0 fw-bold">Liste des Comptes</p>
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <p class="text-primary m-0 fw-bold">Liste des Comptes</p>
+        </div>
+        <div class="col-2 align-self-end">
+          <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addCompteModal"><i class="bi bi-plus-lg"></i>Ajouter un Compte</button>
+        </div>
+      </div>
     </div>
     <div class="card-body">
+<!--      Modal Popup      -->
+      <div class="modal fade" id="addCompteModal" tabindex="-1" aria-labelledby="addCompteModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un Compte</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="createCompteFormGroup" (ngSubmit)="handleCreateCompte()">
+              <div class="modal-body">
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="numClient">Numéro du Client :</label>
+                  <div class="col">
+                    <input type="text" class="form-control" id="numClient" formControlName="numClientCreate">
+<!--                    <datalist id="listClient">-->
+<!--                      <option>Option 1</option>-->
+<!--                      <option>Option 2</option>-->
+<!--                      <option>Option 3</option>-->
+<!--                    </datalist>-->
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="balance">Balance :</label>
+                  <div class="col input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" id="balance" formControlName="balance">
+                    <span class="input-group-text">0.00</span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="typeCompte">Type de Compte :</label>
+                  <div class="col">
+                    <select class="form-select" name="Type Compte" id="typeCompte" aria-label="type de compte" formControlName="typeCompte">
+                      <option selected disabled>Choisir Le Type de Compte</option>
+                      <option value="1">Compte Courant</option>
+                      <option value="2">Compte Epargne</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="devise">Devise :</label>
+                  <div class="col">
+                    <select class="form-select" name="Devise" id="devise" aria-label="devise" formControlName="devise">
+                      <option selected disabled>Choisir La Devise</option>
+                      <option value="MAD">MAD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="USD">USD</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--      Modal Popup End      -->
       <form [formGroup]="CompteByRibFormGroup" (ngSubmit)="handleCompteByRib()">
         <div class="input-group mb-3">
           <span class="input-group-text">N° RIB</span>
-          <input class="form-control" formControlName="numRib" type="text">
+          <input class="form-control" formControlName="numRib" type="text" placeholder="N° RIB">
           <button class="btn btn-primary">
             <i class="fas fa-search"></i>
           </button>
@@ -17,7 +84,7 @@
       <form [formGroup]="CompteByNumClientFormGroup" (ngSubmit)="handleCompteByNumClient()">
         <div class="input-group mb-3">
           <span class="input-group-text">N° Client</span>
-          <input class="form-control" formControlName="numClient" type="text">
+          <input class="form-control" formControlName="numClient" type="text" placeholder="N° Client">
           <button class="btn btn-primary">
             <i class="fas fa-search"></i>
           </button>
@@ -43,8 +110,9 @@
             <td>{{c.dateCreation}}</td>
             <td>{{c.devise}}</td>
             <td>
-              <button class="btn btn-primary mx-2" title="Détails"><i class="bi bi-receipt"></i></button>
-              <button class="btn btn-success" title="Opération"><i class="bi bi-cash-coin"></i></button>
+              <button class="btn btn-primary me-2" title="Détails"><i class="bi bi-receipt"></i></button>
+              <button class="btn btn-success me-2" title="Opération"><i class="bi bi-cash-coin"></i></button>
+              <button class="btn btn-danger" title="Supprimer"><i class="bi bi-trash"></i></button>
             </td>
           </tr>
           </tbody>
