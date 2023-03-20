@@ -28,4 +28,8 @@ export class CompteService {
   public createCompte(compte : Compte, numClient : string, idGestionnaire : number) : Observable<Compte>{
     return this.http.post<Compte>("http://localhost:8086/comptes/create?numClient=" + numClient + "&idGestionnaire=" + idGestionnaire, compte);
   }
+
+  public deleteCompte(ribCompte : number) {
+    return this.http.delete("http://localhost:8086/comptes/deleteByRib/" + ribCompte);
+  }
 }
