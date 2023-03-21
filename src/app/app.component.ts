@@ -6,6 +6,7 @@ import { SecurityService} from './services/security.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit{
  title = 'BankManagementFront';
  constructor(public securityService:SecurityService) { }
@@ -25,4 +26,8 @@ export class AppComponent implements OnInit{
      redirectUri : window.location.origin
    })
  }
+
+export class AppComponent {
+  title = 'BankManagementFront';
+
 }
