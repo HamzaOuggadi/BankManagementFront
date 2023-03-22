@@ -26,6 +26,10 @@
                   <label class="col-3 col-form-label" for="numClient">Numéro du Client :</label>
                   <div class="col">
                     <input type="text" class="form-control" id="numClient" formControlName="numClientCreate">
+                    <span class="text-danger" *ngIf="createCompteFormGroup.controls['numClientCreate'].touched
+                    && createCompteFormGroup.controls['numClientCreate'].errors?.['required']">
+                      Ce Champs est Obligatoire !
+                    </span>
 <!--                    <datalist id="listClient">-->
 <!--                      <option>Option 1</option>-->
 <!--                      <option>Option 2</option>-->
@@ -39,6 +43,10 @@
                     <span class="input-group-text">$</span>
                     <input type="text" class="form-control" id="balance" formControlName="balance">
                     <span class="input-group-text">0.00</span>
+                    <span class="text-danger col-12" *ngIf="createCompteFormGroup.controls['balance'].touched
+                    && createCompteFormGroup.controls['balance'].errors?.['required']">
+                      Ce Champs est Obligatoire !
+                    </span>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -46,9 +54,13 @@
                   <div class="col">
                     <select class="form-select" name="Type Compte" id="typeCompte" aria-label="type de compte" formControlName="typeCompte">
                       <option selected disabled>Choisir Le Type de Compte</option>
-                      <option value="1">Compte Courant</option>
-                      <option value="2">Compte Epargne</option>
+                      <option value="COMPTE_COURANT">Compte Courant</option>
+                      <option value="COMPTE_EPARGNE">Compte Epargne</option>
                     </select>
+                    <span class="text-danger" *ngIf="createCompteFormGroup.controls['typeCompte'].touched
+                    && createCompteFormGroup.controls['typeCompte'].errors?.['required']">
+                      Ce Champs est Obligatoire !
+                    </span>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -60,12 +72,16 @@
                       <option value="EUR">EUR</option>
                       <option value="USD">USD</option>
                     </select>
+                    <span class="text-danger" *ngIf="createCompteFormGroup.controls['devise'].touched
+                    && createCompteFormGroup.controls['devise'].errors?.['required']">
+                      Ce Champs est Obligatoire !
+                    </span>
                   </div>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                <button [disabled]="!createCompteFormGroup.valid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
               </div>
             </form>
           </div>
@@ -99,20 +115,22 @@
             <th>Balance</th>
             <th>Date d'Ouverture</th>
             <th>Devise</th>
+            <th>Sitex</th>
             <th>Action</th>
           </tr>
           </thead>
           <tbody class="table-group-divider">
           <tr *ngFor="let c of comptes | async">
-            <td>{{c.ribCompte}}</td>
+            <td>{{c.ribAsString}}</td>
             <td>{{c.typeCompte}}</td>
             <td>{{c.balance}}</td>
             <td>{{c.dateCreation}}</td>
             <td>{{c.devise}}</td>
+            <td>{{c.sitex}}</td>
             <td>
-              <button class="btn btn-primary me-2" title="Détails"><i class="bi bi-receipt"></i></button>
-              <button class="btn btn-success me-2" title="Opération"><i class="bi bi-cash-coin"></i></button>
-              <button class="btn btn-danger" title="Supprimer"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-primary me-2" title="Détails du Compte"><i class="bi bi-receipt"></i></button>
+              <button class="btn btn-success me-2" title="Opérations"><i class="bi bi-cash-coin"></i></button>
+              <button type="button" (click)="handleDeleteCompte(c)" class="btn btn-danger" title="Supprimer"><i class="bi bi-trash"></i></button>
             </td>
           </tr>
           </tbody>

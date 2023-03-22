@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {catchError, Observable, throwError} from "rxjs";
 import {Compte} from "../../models/compte.model";
 import {CompteService} from "../../services/compte.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+declare var $: any;
 
 @Component({
   selector: 'app-compte',
@@ -31,10 +32,10 @@ export class CompteComponent implements OnInit{
     });
 
     this.createCompteFormGroup = this.fb.group({
-      numClientCreate : this.fb.control(""),
-      balance : this.fb.control(""),
-      typeCompte : this.fb.control(""),
-      devise : this.fb.control("")
+      numClientCreate : this.fb.control("", [Validators.required]),
+      balance : this.fb.control("",[Validators.required, Validators.min(100)]),
+      typeCompte : this.fb.control("", [Validators.required]),
+      devise : this.fb.control("", [Validators.required])
     })
 
     this.comptes = this.compteService.getListComptes().pipe(
@@ -62,11 +63,9 @@ export class CompteComponent implements OnInit{
 
   handleCreateCompte() {
     let compte = this.createCompteFormGroup?.value
+    console.log(compte);
     let idGestionnaire : number = 0;
     let numClient = this.createCompteFormGroup?.value.numClientCreate;
-    // compte.typeCompte = this.createCompteFormGroup?.value.typeCompteCreate;
-    // compte.balance = this.createCompteFormGroup?.value.balance;
-    // compte.devise = this.createCompteFormGroup?.value.deviseCreate;
     this.compteService.createCompte(compte, numClient, idGestionnaire).subscribe({
       next : data => {
         alert("Compte Créer avec succès !");
@@ -74,5 +73,19 @@ export class CompteComponent implements OnInit{
         console.log(err);
       }
     })
+  }
+
+  handleDeleteCompte(c: Compte) {
+    let rib = parseInt(c.ribAsString)
+    if (confirm("Vous êtes sûr de vouloir supprimer ce compte ?")) {
+      this.compteService.deleteCompte(rib).subscribe({
+        next : data => {
+
+          this.handleCompteByRib();
+        }, error : err => {
+          console.log(err);
+        }
+      });
+    }
   }
 }
