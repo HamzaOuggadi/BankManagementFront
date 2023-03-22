@@ -5,4 +5,5 @@ export interface Compte {
   balance : number;
   dateCreation : Date;
   devise : string;
+  sitex : string;
 }
