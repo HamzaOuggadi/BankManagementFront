@@ -1,3 +1,5 @@
+import {Gestionnaire} from "./gestionnaire.model";
+
 export interface Compte {
   ribCompte : number;
   ribAsString : string;
@@ -6,4 +8,5 @@ export interface Compte {
   dateCreation : Date;
   devise : string;
   sitex : string;
+  idGestionnaire : number;
 }

@@ -3,6 +3,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {Compte} from "../../models/compte.model";
 import {CompteService} from "../../services/compte.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Gestionnaire} from "../../models/gestionnaire.model";
 declare var $: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class CompteComponent implements OnInit{
   createCompteFormGroup! : FormGroup;
   errorMessage! : string;
   idGestionnaire!:number;
+  gestionnaires! : Observable<Array<Gestionnaire>>;
   constructor(private compteService : CompteService,
               private fb : FormBuilder) {
 
@@ -36,7 +38,8 @@ export class CompteComponent implements OnInit{
       numClientCreate : this.fb.control("", [Validators.required]),
       balance : this.fb.control("",[Validators.required, Validators.min(100)]),
       typeCompte : this.fb.control("", [Validators.required]),
-      devise : this.fb.control("", [Validators.required])
+      devise : this.fb.control("", [Validators.required]),
+      idGestionnaire : this.fb.control("")
     })
 
     this.comptes = this.compteService.getListComptes().pipe(
@@ -72,7 +75,7 @@ export class CompteComponent implements OnInit{
   handleCreateCompte() {
     let compte = this.createCompteFormGroup?.value
     console.log(compte);
-    let idGestionnaire : number = 0;
+    let idGestionnaire : number = this.createCompteFormGroup?.value.idGestionnaire;
     let numClient = this.createCompteFormGroup?.value.numClientCreate;
     this.compteService.createCompte(compte, numClient, idGestionnaire).subscribe({
       next : data => {
@@ -84,7 +87,7 @@ export class CompteComponent implements OnInit{
   }
 
   handleDeleteCompte(c: Compte) {
-    let rib = parseInt(c.ribAsString)
+    let rib = c.ribAsString
     if (confirm("Vous êtes sûr de vouloir supprimer ce compte ?")) {
       this.compteService.deleteCompte(rib).subscribe({
         next : data => {
