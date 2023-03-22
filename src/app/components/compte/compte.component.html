@@ -78,6 +78,14 @@
                     </span>
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="gestionnaire">Gestionnaire :</label>
+                  <div class="col">
+                    <select *ngFor="let g of gestionnaires | async" formControlName="idGestionnaire" class="form-select" aria-label="Sélectionner un Gestionnaire" id="gestionnaire">
+                      <option value="{{g.idGestionnaire}}">{{g.idGestionnaire}} - {{g.nom}}</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
