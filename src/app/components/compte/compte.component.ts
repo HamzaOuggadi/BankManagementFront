@@ -25,6 +25,11 @@ export class CompteComponent implements OnInit{
 
   ngOnInit(): void {
 
+    this.gestionnaires = this.compteService.getListGestionnaire().pipe(catchError(err => {
+      this.errorMessage = err.message();
+      return throwError(err);
+    }));
+
     this.CompteByRibFormGroup = this.fb.group({
       numRib : this.fb.control("")
     });
