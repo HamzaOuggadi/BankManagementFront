@@ -81,8 +81,8 @@
                 <div class="row mb-3">
                   <label class="col-3 col-form-label" for="gestionnaire">Gestionnaire :</label>
                   <div class="col">
-                    <select *ngFor="let g of gestionnaires | async" formControlName="idGestionnaire" class="form-select" aria-label="Sélectionner un Gestionnaire" id="gestionnaire">
-                      <option value="{{g.idGestionnaire}}">{{g.idGestionnaire}} - {{g.nom}}</option>
+                    <select formControlName="idGestionnaire" class="form-select" aria-label="Sélectionner un Gestionnaire" id="gestionnaire">
+                      <option *ngFor="let g of gestionnaires | async" value="{{g.idGestionnaire}}">{{g.idGestionnaire}} - {{g.nom}}</option>
                     </select>
                   </div>
                 </div>
