@@ -25,6 +25,11 @@ export class CompteService {
     return this.http.get<Array<Compte>>("http://localhost:8086/comptes?numClient=" + numClient);
   }
 
+
+  public getCompteByGestionnaire(idGestionnaire : number) : Observable<Array<Compte>> {
+    return this.http.get<Array<Compte>>("http://localhost:8086/comptes/compteByGestionnaire/" + idGestionnaire);
+  }
+
   public createCompte(compte : Compte, numClient : string, idGestionnaire : number) : Observable<Compte>{
     return this.http.post<Compte>("http://localhost:8086/comptes/create?numClient=" + numClient + "&idGestionnaire=" + idGestionnaire, compte);
   }

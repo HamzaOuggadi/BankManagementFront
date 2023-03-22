@@ -77,13 +77,15 @@ export class CompteComponent implements OnInit{
 
   handleDeleteCompte(c: Compte) {
     let rib = parseInt(c.ribAsString)
-    this.compteService.deleteCompte(rib).subscribe({
-      next : data => {
-        confirm("Vous êtes sûr de vouloir supprimer ce compte ?");
-        // this.handleCompteByRib();
-      }, error : err => {
-        console.log(err);
-      }
-    });
+    if (confirm("Vous êtes sûr de vouloir supprimer ce compte ?")) {
+      this.compteService.deleteCompte(rib).subscribe({
+        next : data => {
+
+          this.handleCompteByRib();
+        }, error : err => {
+          console.log(err);
+        }
+      });
+    }
   }
 }
