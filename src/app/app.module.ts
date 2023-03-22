@@ -15,8 +15,6 @@ import { RestrictionComponent } from './components/restriction/restriction.compo
     CompteComponent,
     GestionnaireComponent,
     RestrictionComponent,
-
-
   ],
   imports: [
     BrowserModule,
