@@ -1,5 +1,5 @@
 export interface Gestionnaire {
   idGestionnaire : number;
-  numGetionnaire : string;
+  numGestionnaire : string;
   nom : string;
 }

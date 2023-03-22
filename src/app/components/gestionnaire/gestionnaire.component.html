@@ -1,0 +1,142 @@
+<div class="container-fluid">
+  <h3 class="text-dark mb-4">Profile Gestionnaire</h3>
+  <div class="card shadow">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <p class="text-primary m-0 fw-bold">Information de Gestionnaire</p><br>
+          <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input class="bg-light form-control border-0 small" [(ngModel)]="idGestionnaire" type="number" placeholder="Recherche par ID..." name="idGestionnaire">
+              <button class="btn btn-primary py-0" (click)="OnCherche()" type="button"><i class="fas fa-search"></i></button>
+              <button class="btn btn-danger" (click)="Delete()"type="button"><i class="bi bi-trash"></i></button>
+            </div>
+          </form>
+        </div>
+        <div class="col-2 align-self-end">
+          <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addCompteModal"><i class="bi bi-plus-lg"></i>Ajouter un Gestionnaire</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!--      Modal Popup      -->
+      <div class="modal fade" id="addCompteModal" tabindex="-1" aria-labelledby="addCompteModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un Gestionnaire</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="creatGestionnaireForm" (ngSubmit)="createGes()">
+              <div class="modal-body">
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="numGestionnaire">Numéro du Gestionnaire :</label>
+                  <div class="col">
+                    <input type="text" class="form-control" id="numGestionnaire" formControlName="numGestionnaire">
+
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="nom">Nom :</label>
+                  <div class="col input-group">
+                    <input type="text" class="form-control" id="nom" formControlName="nom">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive table mt-2" id="" role="grid" aria-describedby="dataTable_info">
+        <table class="table my-0" id="dataTable">
+          <thead>
+          <tr>
+            <th>Id </th>
+            <th>N° Gestionnaire</th>
+            <th>Nom</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr *ngIf="gestionnaires">
+            <td>{{gestionnaires.idGestionnaire}}</td>
+            <td>{{gestionnaires.numGestionnaire}}</td>
+            <td>{{gestionnaires.nom}}</td>
+            <td>
+<!--              <button class="btn btn-danger" (click)="Delete()"type="button"><i class="bi bi-trash"></i></button>-->
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <h3 class="text-dark mb-4"></h3>
+  <div class="card shadow">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <p class="text-primary m-0 fw-bold">Liste des Comptes</p>
+        </div>
+
+
+
+      </div>
+    </div>
+    <div class="card-body">
+      <!--      Modal Popup      -->
+      <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+        <table class="table my-0" id="dataTable">
+          <thead>
+          <tr>
+            <th>N° RIB</th>
+            <th>Type de Compte</th>
+            <th>Balance</th>
+            <th>Date d'Ouverture</th>
+            <th>Devise</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr *ngFor="let c of comptes | async">
+            <td>{{c.ribCompte}}</td>
+            <td>{{c.typeCompte}}</td>
+            <td>{{c.balance}}</td>
+            <td>{{c.dateCreation}}</td>
+            <td>{{c.devise}}</td>
+            <td>
+              <button class="btn btn-primary me-2" title="Détails"><i class="bi bi-receipt"></i></button>
+              <button class="btn btn-success me-2" title="Opération"><i class="bi bi-cash-coin"></i></button>
+              <button class="btn btn-danger" title="Supprimer"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-md-6 align-self-center">
+          <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+        </div>
+        <div class="col-md-6">
+          <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+            <ul class="pagination">
+              <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
