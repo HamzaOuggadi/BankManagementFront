@@ -16,6 +16,7 @@ export class CompteComponent implements OnInit{
   CompteByNumClientFormGroup! : FormGroup;
   createCompteFormGroup! : FormGroup;
   errorMessage! : string;
+  idGestionnaire!:number;
   constructor(private compteService : CompteService,
               private fb : FormBuilder) {
 
@@ -43,6 +44,13 @@ export class CompteComponent implements OnInit{
       this.errorMessage = err.message();
       return throwError(err);
     }));
+
+    this.comptes = this.compteService.getCompteByGestionnaire(this.idGestionnaire).pipe(
+      catchError(err => {
+        this.errorMessage = err.message();
+        return throwError(err);
+      }));
+
   }
 
   handleCompteByRib() {

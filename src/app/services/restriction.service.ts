@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Restriction } from "../models/restriction.model";
 import { environment } from "../../environments/environment";
+import {Compte} from "../models/compte.model";
 
 
 @Injectable({
@@ -11,6 +12,10 @@ import { environment } from "../../environments/environment";
 export class RestrictionService {
 
   constructor(private http: HttpClient) {
+  }
+
+  public getListRestriction() : Observable<Array<Restriction>> {
+    return this.http.get<Array<Restriction>>(environment.API_URL_Restriction+"/list");
   }
 
   getRestrictionById(idRestriction: number): Observable<Restriction> {

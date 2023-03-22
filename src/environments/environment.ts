@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   API_URL_Gestionnaire:"http://localhost:8086/gestionnaire",
-  API_URL_Restriction: "http://localhost:8086/gestionnaire/restriction"
+  API_URL_Restriction: "http://localhost:8086/restriction"
 
 };
 

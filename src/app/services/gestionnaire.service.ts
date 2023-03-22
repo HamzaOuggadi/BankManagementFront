@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Gestionnaire } from '../models/gestionnaire.model';
 import { environment } from "../../environments/environment";
+import {Restriction} from "../models/restriction.model";
 
 
 @Injectable({
@@ -11,6 +12,10 @@ import { environment } from "../../environments/environment";
 export class GestionnaireService {
 
   constructor(private http: HttpClient) {
+  }
+
+  public getListGestionnaire() : Observable<Array<Gestionnaire>> {
+    return this.http.get<Array<Gestionnaire>>(environment.API_URL_Gestionnaire+"/list");
   }
 
   getGestionnaireById(idGestionnaire: number): Observable<Gestionnaire> {
