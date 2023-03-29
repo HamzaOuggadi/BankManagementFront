@@ -1,0 +1,149 @@
+
+/*.container{
+
+}
+.intro {
+  height: 100%;
+}
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th {
+  color: #1a5dc2;
+}
+
+.card {
+  border-radius: .5rem;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+thead {
+  top: 0;
+  position: sticky;
+}*/
+
+  * {
+    box-sizing: border-box;
+  }
+body {
+  font-family: "Open Sans";
+  background: #2c3e50;
+  color: #ecf0f1;
+  line-height: 1.618em;
+}
+.wrapper {
+  max-width: 50rem;
+  width: 100%;
+  margin: 0 auto;
+}
+.tabs {
+  position: relative;
+  margin: 3rem 0;
+
+  background: #4e73df;
+  height:max-content;
+}
+.tabs::before,
+.tabs::after {
+  content: "";
+  display: table;
+}
+.tabs::after {
+  clear: both;
+}
+.tab {
+  float: left;
+}
+.tab-switch {
+  display: none;
+}
+.tab-label {
+  position: relative;
+  display: block;
+  line-height: 2.75em;
+  height: 3em;
+  padding: 0 1.618em;
+  background: rgb(142, 166, 236);
+  border-right: 0.125rem solid #8ea6ec;
+  color: #fff;
+  cursor: pointer;
+  top: 0;
+  transition: all 0.25s;
+}
+.tab-label:hover {
+  top: -0.25rem;
+  transition: top 0.25s;
+}
+.tab-content {
+  height: 12rem;
+  position: absolute;
+  z-index: 1;
+  top: 2.75em;
+  left: 0;
+  padding: 1.618rem;
+  background: #fff;
+  color: #2c3e50;
+  border-bottom: 0.25rem solid #ffffff;
+  opacity: 0;
+  transition: all 0.35s;
+}
+.tab-switch:checked + .tab-label {
+  background: #fff;
+  color: #2c3e50;
+  border-bottom: 0;
+  border-right: 0.125rem solid #fff;
+  transition: all 0.35s;
+  z-index: 1;
+  top: -0.0625rem;
+}
+.tab-switch:checked + label + .tab-content {
+  z-index: 2;
+  opacity: 1;
+  transition: all 0.35s;
+}
+.buttonAjouterClient {
+  border-color: #4e73df;
+  color: #ffffff;
+  background:#4e73df;
+  border-color:#8ea6ec ;
+  border-bottom: #8ea6ec;
+  border-right: #8ea6ec;
+  position:absolute ;
+  right: 10px;
+  top:5px;
+}
+
+.buttonAjouterClient:hover {
+  background: #8ea6ec;
+  color: white;
+  border-color:#8ea6ec ;
+}
+
+.buttonAjouterEntreprise {
+  border-color: #4e73df;
+  color: #ffffff;
+  background:#4e73df;
+  border-color:#8ea6ec ;
+  border-bottom: #8ea6ec;
+  border-right: #8ea6ec;
+  position:absolute ;
+  right: 50px;
+  top:5px;
+}
+
+.buttonAjouterEntreprise:hover {
+  background: #8ea6ec;
+  color: white;
+  border-color:#8ea6ec ;
+}

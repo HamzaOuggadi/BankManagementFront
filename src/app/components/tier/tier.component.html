@@ -1,0 +1,350 @@
+<div class="container-fluid">
+  <h3 class="text-dark mb-4">Gestion Des Clients</h3>
+  <!--      Modal Popup   PP   -->
+  <div class="modal fade" id="addCompteModalPP" tabindex="-1" aria-labelledby="addCompteModalPP" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary text-light">
+
+          <h1 class="modal-title fs-5" id="exampleModalLabelPP"><i class="bi bi-person-add" style="margin-right: 10px;"></i>Ajouter un Client</h1>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="createTierFormGroup" (ngSubmit)="handleCreatePersommePhysique()">
+          <div class="modal-body">
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="numClientPP">Numéro du Client :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="numClientPP" formControlName="numClient">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['numClient'].touched
+                       && createTierFormGroup.controls['numClient'].errors!
+                       && createTierFormGroup.controls['numClient'].errors!['required']">
+                Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="nomComplet">Nom Complet :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="nomComplet" formControlName="nomComplet">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['nomComplet'].touched
+                       && createTierFormGroup.controls['nomComplet'].errors
+                   ">
+                Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="email">Email :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="email" formControlName="email">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['email'].touched
+                         && createTierFormGroup.controls['email'].errors!
+                       && createTierFormGroup.controls['email'].errors!['email']">
+                Email non valide
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="numTel">N°Télé :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="numTel" formControlName="numTel">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['numTel'].touched
+                        && createTierFormGroup.controls['numTel'].errors
+                  ">
+                  Numero de téléphone non valide
+                </span>
+              </div>
+            </div>
+            <!--<div class="row mb-3">
+              <label class="col-3 col-form-label" for="typeIdentification">Type D'Identification:</label>
+              <div class="col">
+                <select class="form-select" name="Type Compte" id="typeIdentification" aria-label="type de compte" formControlName="typeIdentification" >
+                  <option  selected disabled>Choisir voter type d'identification</option>
+                  <option value="1">  Morocain</option>
+                  <option value="2">Afghan</option>
+                  <option value="3">  Albanais</option>
+                  <option value="4">  Allemand</option>
+                  <option value="5">  Canadien</option>
+                  <option value="6">  Chilien</option>
+                  <option value="7">  Chypriote</option>
+                  <option value="8">  Congolais</option>
+                  <option value="9">  Costaricain</option>
+                  <option value="10">  Cubain</option>
+                  <option value="11">  Dominicain</option>
+                  <option value="12"> Egyptien</option>
+                  <option value="13">  Equatorien</option>
+                  <option value="14">  Estonien</option>
+                  <option value="15">  Ethiopien</option>
+                  <option value="16">  Finlandais</option>
+                </select>
+
+              </div>
+
+            </div>-->
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="dateNaissance">Date de Naissance :</label>
+              <div class="col">
+                <input type="date"  value="" min="2020-01-01" max="2050-12-31" class="form-control" id="dateNaissance" formControlName="dateNaissance">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['dateNaissance'].touched
+                       && createTierFormGroup.controls['dateNaissance'].errors">
+                  Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="!createTierFormGroup.valid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--      Modal Popup End      -->
+  <!--      Modal Popup  PM     -->
+  <div class="modal fade" id="addCompteModal" tabindex="-1" aria-labelledby="addCompteModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary text-light">
+
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-building-add" style="margin-right: 10px;"></i>Ajouter un Client</h1>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="createTierFormGroup" (ngSubmit)="handleCreatePersommeMorale()">
+          <div class="modal-body">
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="numClient">Numéro du Client :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="numClient" formControlName="numClient">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['numClient'].touched
+                       && createTierFormGroup.controls['numClient'].errors
+                     ">
+                  Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="raionSociale">RaionSociale :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="raionSociale" formControlName="raionSociale">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['raionSociale'].touched
+                       && createTierFormGroup.controls['raionSociale'].errors
+                     ">
+                  Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="numRegisterComm">N°Registre De Commerce :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="numRegisterComm" formControlName="numRegisterComm">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['numRegisterComm'].touched
+                       && createTierFormGroup.controls['numRegisterComm'].errors
+                  ">
+                  Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="adresse">Adresse :</label>
+              <div class="col">
+                <input type="text" class="form-control" id="adresse" formControlName="adresse">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['adresse'].touched
+                       && createTierFormGroup.controls['adresse'].errors
+                     ">
+                  Ce champ est obligatoire
+                </span>
+              </div>
+
+            </div>
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="nationalité">Nationalité :</label>
+              <div class="col">
+                <select class="form-select" name="Type nationalité" id="nationalité" aria-label="type de nationalité" formControlName="nationalite"
+                        #operationTypeSelect
+                        (change)="setTypeNationalite(operationTypeSelect.value)">
+                  <option  selected disabled>Choisir voter nationalité</option>
+                  <option value="Morocain">  Morocain</option>
+                  <option value="Afghan">Afghan</option>
+                  <option value="Albanais">  Albanais</option>
+                  <option value="Allemand">  Allemand</option>
+                  <option value="Canadien">  Canadien</option>
+                  <option value="Albanais">  Chilien</option>
+                  <option value="Chypriote">  Chypriote</option>
+                  <option value="Congolais">  Congolais</option>
+                  <option value="Costaricain">  Costaricain</option>
+                  <option value="Cubain">  Cubain</option>
+                  <option value="Dominicain">  Dominicain</option>
+
+                </select>
+              </div>
+
+            </div>
+            <div class="row mb-3">
+              <label class="col-3 col-form-label" for="dateSouscription">Date de Souscription :</label>
+              <div class="col">
+                <input type="date"  value="" min="2020-01-01" max="2050-12-31" class="form-control" id="dateSouscription" formControlName="dateSouscription">
+                <span  class="text-danger"
+                       *ngIf="createTierFormGroup.controls['dateSouscription'].touched
+                       && createTierFormGroup.controls['dateSouscription'].errors
+                     ">
+                  Ce champ est obligatoire
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="!createTierFormGroup.valid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--      Modal Popup End      -->
+  <div class="card shadow" style="height: 1000px">
+
+    <div class="tabs"    style="margin-top: 0px;">
+
+    <div class="tab">
+      <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+      <label for="tab-1" class="tab-label">Personne Morale</label>
+
+      <div class="tab-content" style="width: 100%; height: max-content">
+
+        <div class="card-body">
+          <form  [formGroup]="searchformGroup" (ngSubmit)="handleSearchPersonnemorale()">
+            <div class="input-group mb-3">
+              <span class="input-group-text">N°Client : </span>
+              <input type="text" formControlName="numClient" class="form-control" type="text" placeholder="N° Client">
+              <button class="btn btn-primary" style="background-color: #4e73df;color: white">
+                 <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+          <div class="table-responsive table mt-2" id="dataTable1" role="grid" aria-describedby="dataTable_info">
+            <table class="table my-0" >
+              <thead>
+                   <tr>
+                     <th>N°Client</th>
+                      <th>N°Register</th>
+                      <th>Raison Sociale</th>
+                      <th>Nationalité</th>
+                      <th>Adresse</th>
+                      <th>Actions</th>
+                   </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                   <tr *ngFor="let p of personnemorale |async">
+                       <td>{{p.numClient}}</td>
+                     <td>{{p.numRegisterComm}}</td>
+                     <td>{{p.raionSociale}}</td>
+                     <td>{{p.nationalite}}</td>
+                     <td>{{p.adresse}}</td>
+                     <td><button (click)="handleDetails(p)"class="btn btn-primary me-2" title="Détails"><i class="bi bi-receipt"></i></button>
+                         <button  (click)="handleDeleteCustomer(p)" class="btn btn-danger" title="Supprimer"><i class="bi bi-trash"></i></button>
+                     </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 align-self-center">
+          <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+          </div>
+           <div class="col-md-6">
+            <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+              <ul class="pagination">
+                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                <li class="page-item" [ngClass]="currentPage==item?'active':''" *ngFor="let item of getPages();"><a class="page-link" (click)="goToPage2(item)">{{item}}</a></li>
+                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+              </ul>
+             </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab">
+        <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+        <label for="tab-2" class="tab-label">Personne Physique</label>
+        <div class="tab-content" style="width: 100%; height: fit-content">
+          <div class="card-body">
+            <div *ngIf="searchformGroup">
+              <form  [formGroup]="searchformGroup" (ngSubmit)="handleSearchPhysique()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">N°Client : </span>
+                  <input type="text" formControlName="numClient" class="form-control" type="text" placeholder="N° Client">
+                  <button class="btn btn-primary" style="background-color: #4e73df;color: white">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+              <table class="table my-0" >
+                <thead>
+                <tr>
+                  <th>N°Client</th>
+                  <th>Nom</th>
+                  <th>Telé</th>
+                  <th>Email</th>
+                  <th>Date Naissance</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr *ngFor="let p of personnephysique |async">
+                  <td>{{p.numClient}}</td>
+                  <td>{{p.nomComplet}}</td>
+                  <td>{{p.numTel}}</td>
+                  <td>{{p.email}}</td>
+                  <td>{{p.dateNaissance}}</td>
+                  <td> <button class="btn btn-primary me-2" title="Détails"><i class="bi bi-receipt"></i></button>
+                    <button class="btn btn-danger" title="Supprimer"><i class="bi bi-trash"></i></button>
+                  </td>
+
+                </tr>
+
+              </table>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 align-self-center">
+              <p id="dataTable_inf" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+            </div>
+            <div class="col-md-6">
+              <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                <ul class="pagination">
+                  <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                  <li class="page-item" [ngClass]="currentPage==item?'active':''" *ngFor="let item of getPages();"><a class="page-link" (click)="goToPage3(item)">{{item}}</a></li>
+                  <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab">
+        <button  class="buttonAjouterEntreprise"  data-bs-toggle="modal" data-bs-target="#addCompteModal" style="border-radius: 50%" title="Ajouter Entreprise"><i class="bi bi-building-add"></i></button>
+        <button  class="buttonAjouterClient" data-bs-toggle="modal" data-bs-target="#addCompteModalPP" style="border-radius: 50%" title="Ajouter Personne"><i class="bi bi-person-add"></i></button>
+      </div>
+
+    </div>
+
+    </div>
+</div>
+

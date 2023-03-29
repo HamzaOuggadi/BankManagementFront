@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { CompteComponent } from './components/compte/compte.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { TierComponent } from './components/tier/tier.component';
+import { TierDetailsComponent } from './components/tier-details/tier-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CompteComponent
+    CompteComponent,
+    TierComponent,
+    TierDetailsComponent
   ],
   imports: [
     BrowserModule,
