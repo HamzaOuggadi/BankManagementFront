@@ -23,10 +23,10 @@ export class RestrictionService {
   }
 
   deleteRestriction(idRestriction:number){
-    this.http.delete(environment.API_URL_Restriction+"/deletebyId/"+idRestriction).subscribe();
+    this.http.delete(environment.API_URL_Restriction+"/deleteById/"+idRestriction).subscribe();
     alert("Gestionn id "+idRestriction)
   }
-  createRestriction(restriction:Restriction):Observable<Restriction>{
+  createRestriction(restriction:Restriction, idClient: number):Observable<Restriction>{
     return this.http.post<Restriction>(environment.API_URL_Restriction+"/create", restriction);
   }
 

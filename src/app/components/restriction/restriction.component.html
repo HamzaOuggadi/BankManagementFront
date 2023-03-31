@@ -1,1 +1,127 @@
-<p>restriction works!</p>
+<div class="container-fluid">
+  <div class="card shadow">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input class="bg-light form-control border-0 small" [(ngModel)]="idRestriction" type="number" placeholder="Recherche par ID..." name="idRestriction">
+              <button class="btn btn-primary py-0" (click)="OnChercheRest()" type="button"><i class="fas fa-search"></i></button>
+              <button class="btn btn-danger" (click)="DeleteRest()"type="button"><i class="bi bi-trash"></i></button>
+            </div>
+          </form>
+        </div>
+        <div class="col-2 align-self-end">
+          <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addRestrictionModal"><i class="bi bi-plus-lg"></i>Ajouter un Restriction</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!--      Modal Popup      -->
+      <div class="modal fade" id="addRestrictionModal" tabindex="-1" aria-labelledby="addRestrictionModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un Restriction</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="creatRestrictionForm" (ngSubmit)="createRest()">
+              <div class="modal-body">
+                <div class="row mb-3">
+                  <label class="col-3 col-form-label" for="etat">Etat :</label>
+                  <div class="col">
+                    <input type="text" class="form-control" id="etat" formControlName="etat">
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <h3 class="text-dark mb-4"></h3>
+  <div class="card shadow">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <p class="text-primary m-0 fw-bold">Liste des Restrictions</p>
+          <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#allRestriction">All</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!--      Modal Popup      -->
+      <div class="modal fade" id="allRestriction" tabindex="-1" aria-labelledby="allRestriction" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModal">All Restriction</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+              <table class="table my-0" id="dataTable">
+                <thead>
+                <tr>
+                  <th>Etat</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr *ngFor="let r of restrictions | async">
+                  <td>{{r.etat}}</td>
+                </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!--      Modal Popup      -->
+      <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+        <table class="table my-0" id="dataTable">
+          <thead>
+          <tr>
+            <th>Etat</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+<!--          <tr *ngFor="let r of restrictions | async">-->
+               <tr *ngIf="restriction">
+              <td>{{restriction.etat}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-md-6 align-self-center">
+          <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+        </div>
+        <div class="col-md-6">
+          <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+            <ul class="pagination">
+              <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
