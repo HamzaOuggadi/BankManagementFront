@@ -27,7 +27,7 @@ export class RestrictionService {
     alert("Gestionn id "+idRestriction)
   }
   createRestriction(restriction:Restriction, idClient: number):Observable<Restriction>{
-    return this.http.post<Restriction>(environment.API_URL_Restriction+"/create", restriction);
+    return this.http.post<Restriction>(environment.API_URL_Restriction+"/create?idClient=" + idClient , restriction);
   }
 
 }
